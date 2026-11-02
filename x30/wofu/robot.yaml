@@ -1,0 +1,42 @@
+model: x30
+robot_id: X30-C
+
+navigation:
+  global_planner:
+    parameters:
+      global_costmap:
+        global_costmap:
+          ros__parameters:
+            # Global route planning proxy; localPlanner keeps the physical robot dimensions.
+            footprint: "[]"
+            robot_radius: 0.18        # Effective radius for global 2D planning, meters
+            footprint_padding: 0.0
+            inflation_layer:
+              inflation_radius: 0.28  # Retain the surrounding soft cost field, meters
+              cost_scaling_factor: 5.0
+  livox:
+    config: "${INSPECTION_CONFIG_DIR}/models/x30/navigation/param_x30_livox_ros_driver2_mid360s.json"
+  slam:
+    parameters:
+      laser_mapping:
+        ros__parameters:
+          filter_size_surf: 0.5
+          filter_size_map: 0.5
+          ivox_grid_resolution: 0.5
+          navigation_health:
+            data_timeout: 0.4
+#  terrain:
+#    parameters:
+#      gridmapper_node:
+#        ros__parameters:
+#          min_point_height: -0.8        # Points below this z are ignored
+#          pitch_downward_retention_trigger_deg: 8.0   # Enable retention above this absolute pitch (deg)
+#          pitch_downward_retention_body_z_min: -0.8   # Retain no points below this body-frame z (m)
+  local_planner:
+    parameters:
+      localPlanner:
+        ros__parameters:
+          terrainTimeout: 0.4
+      cmd_vel_guard:
+        ros__parameters:
+          data_timeout: 0.4

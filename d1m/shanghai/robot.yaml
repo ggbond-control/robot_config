@@ -1,0 +1,39 @@
+model: d1m
+robot_id: D1M-A
+
+system:
+  task_hub:
+    obstacle_snapshot_enabled: true
+    obstacle_photo_enabled: false
+
+navigation:
+  slam:
+    parameters:
+      laser_mapping:
+        ros__parameters:
+          initial_alignment:
+            position: [0.0, 0.0, 0.0]
+            yaw: 0.0
+          navigation_health:
+            data_timeout: 0.3
+  local_planner:
+    parameters:
+      localPlanner:
+          ros__parameters:
+            terrainTimeout: 0.4
+      pathFollower:
+        ros__parameters:
+          pathTimeout: 0.3
+          tracking_mode: "turn_feasible"
+          turn_forward_speed_samples: [0.0]
+          turn_lateral_speed_samples: [0.5]
+          turn_lateral_zero_above_speed: 1.0
+          turn_response_time: 0.2
+  # D1M G90 receiver and NTRIP overrides; keep credentials on this device.
+  gnss:
+    ntrip_parameters:
+      ntrip_client:
+        ros__parameters:
+          username: "6hhjc1578"
+          password: "53946"
+          rtk_port: /dev/ttyS0
