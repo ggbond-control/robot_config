@@ -1,5 +1,5 @@
 model: d1m
-robot_id: D1M-A
+robot_id: D1M-B
 
 system:
   task_hub:
@@ -7,13 +7,24 @@ system:
     obstacle_photo_enabled: false
 
 navigation:
+  global_planner:
+    parameters:
+      multi_map_nav_node:
+        ros__parameters:
+          coarse_xy_tolerance: 0.3
+          coarse_yaw_tolerance: 0.3
+          position_only_xy_tolerance: 0.5
   slam:
     parameters:
       laser_mapping:
         ros__parameters:
+          rtk:
+            lidar_recovery:
+              min_downsampled_points: 200            # TRACKING 与 RECOVERING 共用的降采样点数下限
+              min_effective_points: 60              # TRACKING 与 RECOVERING 共用的有效匹配点数下限
           initial_alignment:
-            position: [0.0, 0.0, 0.0]
-            yaw: 0.0
+            position: [28.5, -50.0, 1.0]
+            yaw: 270.0
           navigation_health:
             data_timeout: 0.3
   local_planner:
