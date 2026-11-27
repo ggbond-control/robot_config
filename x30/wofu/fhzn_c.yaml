@@ -1,0 +1,35 @@
+model: x30
+robot_id: x30
+
+system:
+  media_upload:
+    mode: s3
+
+  mqtt:
+    sn: x30
+    host: 111.77.141.65
+    port: 11883
+    topic_vendor_prefix: fh
+
+  algorithm_mqtt:
+    host: 111.77.141.65
+    port: 11883
+
+  sensor_gimbal:
+    device:
+      device_ip: 192.168.2.64
+      device_port: 8000
+      hk_isapi_port: 80
+      username: admin
+      password: FHZNfhzn
+      login_mode: 0
+  live_stream:
+    streams:
+    - identifier: gimbal/vis
+      name: 可见光摄像头
+      rtsp_url: rtsp://admin:FHZNfhzn@192.168.2.64:554/Streaming/Channels/102
+      enabled: true
+    - identifier: gimbal/ir
+      name: 红外摄像头
+      rtsp_url: rtsp://admin:FHZNfhzn@192.168.2.64:554/Streaming/Channels/201
+      enabled: true
